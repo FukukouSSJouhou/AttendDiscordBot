@@ -4,6 +4,7 @@ import settings
 TOKEN=settings.APIKEY
 client=discord.Client()
 @client.event
-async def on_Ready():
+async def on_ready():
     print("logined!")
+
 client.run(TOKEN)
