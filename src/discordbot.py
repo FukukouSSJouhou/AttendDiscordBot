@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import discord
 import settings
+import sqlite3
 from discord.ext import commands
 TOKEN=settings.APIKEY
 bot = commands.Bot(command_prefix='/')
