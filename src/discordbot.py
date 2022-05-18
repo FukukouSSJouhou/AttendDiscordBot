@@ -9,9 +9,11 @@ dbname = 'main.db'
 conn = sqlite3.connect(dbname)
 cur = conn.cursor()
 cur.execute("CREATE TABLE IF NOT EXISTS \"userinfo\" (\"schoolnumber\"	INTEGER NOT NULL UNIQUE,\"id\"	INTEGER NOT NULL UNIQUE,PRIMARY KEY(\"id\"))")
+cur.execute("CREATE TABLE IF NOT EXISTS \"Calender\" (\"schoolnumber\" INTEGER  NOT NULL,\"date\" TEXT NOT NULL,\"time\" TEXT NOT NULL,\"fiscalyear\" INTEGER NOT NULL)")
 bot = commands.Bot(command_prefix='/')
 @bot.command()
 async def attend(ctx):
+
     await ctx.send("attended!!")
 @bot.command()
 async def show(ctx):
