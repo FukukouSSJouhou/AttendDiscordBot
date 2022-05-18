@@ -7,7 +7,7 @@ TOKEN=settings.APIKEY
 dbname = 'main.db'
 conn = sqlite3.connect(dbname)
 cur = conn.cursor()
-cur.execute("CREATE TABLE IF NOT EXISTS \"userinfo\" (\"schoolnumber\"	INTEGER,\"id\"	TEXT)")
+cur.execute("CREATE TABLE IF NOT EXISTS \"userinfo\" (\"schoolnumber\"	INTEGER NOT NULL UNIQUE,\"id\"	TEXT NOT NULL UNIQUE)")
 bot = commands.Bot(command_prefix='/')
 @bot.command()
 async def attend(ctx):
