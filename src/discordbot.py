@@ -2,6 +2,7 @@
 import discord
 import settings
 import sqlite3
+from admins import AdminCategory
 from discord.ext import commands
 TOKEN=settings.APIKEY
 dbname = 'main.db'
@@ -15,6 +16,6 @@ async def attend(ctx):
 @bot.command()
 async def show(ctx):
     await ctx.send("show")
-
+bot.add_cog(AdminCategory(bot=bot,cur=cur,conn=conn))
 bot.run(TOKEN)
 conn.close()
