@@ -4,6 +4,9 @@ import settings
 import sqlite3
 from discord.ext import commands
 TOKEN=settings.APIKEY
+dbname = 'main.db'
+conn = sqlite3.connect(dbname)
+cur = conn.cursor()
 bot = commands.Bot(command_prefix='/')
 @bot.command()
 async def attend(ctx):
@@ -14,4 +17,6 @@ async def registry(ctx,gakusekinumber):
 @bot.command()
 async def show(ctx):
     await ctx.send("show")
+
 bot.run(TOKEN)
+conn.close()
