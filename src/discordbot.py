@@ -7,4 +7,10 @@ bot = commands.Bot(command_prefix='/')
 @bot.command()
 async def attend(ctx):
     await ctx.send("attended!!")
+@bot.command()
+async def registry(ctx,gakusekinumber):
+    await ctx.send("reg:" + gakusekinumber + " author: " + str(ctx.author.id))
+@bot.command()
+async def show(ctx):
+    await ctx.send("show")
 bot.run(TOKEN)
