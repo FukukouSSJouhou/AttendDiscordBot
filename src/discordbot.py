@@ -13,6 +13,7 @@ cur.execute("CREATE TABLE IF NOT EXISTS \"Calender\" (\"schoolnumber\" INTEGER  
 bot = commands.Bot(command_prefix='/')
 @bot.command()
 async def attend(ctx):
+    idkun=int(ctx.author.id)
 
     await ctx.send("attended!!")
 @bot.command()
