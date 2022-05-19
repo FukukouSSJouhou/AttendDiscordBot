@@ -14,7 +14,13 @@ def isExistAttendCalam(schoolnumber,datekun,timekun,fiscalyear,cur2,conn2):
                 return False
             else:
                 return True
-
+def getSchoolNumber(userid,cur2):
+    query=u'''SELECT schoolnumber FROM userinfo 
+    WHERE id = ?
+    '''
+    for row in cur2.execute(query, (userid,)):
+        return row[0]
+    return 0
 class ScheduleCategory(commands.Cog, name="schedule"):
     def __init__(self, bot, cur, conn,nendo):
         super().__init__()
@@ -25,9 +31,9 @@ class ScheduleCategory(commands.Cog, name="schedule"):
     @commands.command()
     async def attend(self,ctx):
         idkun=int(ctx.author.id)
+        schoolnumber=getSchoolNumber(idkun,self.cur)
+        await ctx.send("attended!!" + str(schoolnumber))
 
-        await ctx.send("attended!!" + str(idkun))
-        
     @commands.command()
     async def show(self,ctx):
         await ctx.send("show")
