@@ -4,3 +4,5 @@
 __pycache__/
 
 src/main.db
+
+*.db-journal
