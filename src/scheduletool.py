@@ -66,6 +66,8 @@ class ScheduleCategory(commands.Cog, name="schedule"):
         if isExistAttendCalam(schoolnumber, datekun, nendo, self.cur, self.conn) == False:
             self.sql_add_Calender(schoolnumber,datekun,timekun,nendo)
             await ctx.send("attended!!" + str(schoolnumber))
+        else:
+            await ctx.send("Already attended!")
 
     @commands.command()
     async def show(self, ctx):
