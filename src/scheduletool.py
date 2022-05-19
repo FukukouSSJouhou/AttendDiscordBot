@@ -7,3 +7,11 @@ class ScheduleCategory(commands.Cog, name="schedule"):
         self.bot = bot
         self.cur = cur
         self.conn = conn
+    @commands.command()
+    async def attend(self,ctx):
+        idkun=int(ctx.author.id)
+
+        await ctx.send("attended!!" + str(idkun))
+    @commands.command()
+    async def show(self,ctx):
+        await ctx.send("show")
