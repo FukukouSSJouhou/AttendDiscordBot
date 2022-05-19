@@ -1,6 +1,8 @@
 from discord.ext import commands
 import datetime
-
+t_delta=datetime.timedelta(hours=9)
+JST=datetime.timezone(t_delta,"JST")
+nendo=2022
 def isExistAttendCalam(schoolnumber,datekun,timekun,fiscalyear,cur2,conn2):
     query=u'''SELECT EXISTS(SELECT * FROM Calender WHERE 
     schoolnumber = ? AND 
@@ -33,6 +35,9 @@ class ScheduleCategory(commands.Cog, name="schedule"):
     async def attend(self,ctx):
         idkun=int(ctx.author.id)
         schoolnumber=getSchoolNumber(idkun,self.cur)
+        datekun=datetime.datetime.now(JST).strftime("%Y%m%d")
+        timekun=datetime.datetime.now(JST).strftime("%H%M%S")
+        
         if schoolnumber == 0:
             await ctx.send("no registered!")
             return
