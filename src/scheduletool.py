@@ -6,13 +6,12 @@ JST = datetime.timezone(t_delta, "JST")
 nendo = 2022
 
 
-def isExistAttendCalam(schoolnumber, datekun, timekun, fiscalyear, cur2, conn2):
+def isExistAttendCalam(schoolnumber, datekun, fiscalyear, cur2, conn2):
     '''
     isExistAttendCalam
 
     :param schoolnumber:school number
     :param datekun: date
-    :param timekun: time
     :param fiscalyear: fiscalyear
     :param cur2: cursor
     :param conn2: connection?
@@ -21,11 +20,10 @@ def isExistAttendCalam(schoolnumber, datekun, timekun, fiscalyear, cur2, conn2):
     query = u'''SELECT EXISTS(SELECT * FROM Calender WHERE 
     schoolnumber = ? AND 
     date = ? AND 
-    time = ? AND
     fiscalyear = ?)
     
         '''
-    for row in cur2.execute(query, (schoolnumber, datekun, timekun, fiscalyear)):
+    for row in cur2.execute(query, (schoolnumber, datekun, fiscalyear)):
         for r in row:
             if (r == 0):
                 return False
@@ -55,7 +53,7 @@ class ScheduleCategory(commands.Cog, name="schedule"):
         VALUES (?,?,?,?)
         '''
         self.cur.execute(query, (schoolnumber, datekun, timekun, nendo))
-
+        self.conn.commit()
     @commands.command()
     async def attend(self, ctx):
         idkun = int(ctx.author.id)
@@ -65,9 +63,9 @@ class ScheduleCategory(commands.Cog, name="schedule"):
             return
         datekun = datetime.datetime.now(JST).strftime("%Y%m%d")
         timekun = datetime.datetime.now(JST).strftime("%H%M%S")
-        if isExistAttendCalam(schoolnumber, datekun, timekun, nendo, self.cur, self.conn) == False:
-            pass
-        await ctx.send("attended!!" + str(schoolnumber))
+        if isExistAttendCalam(schoolnumber, datekun, nendo, self.cur, self.conn) == False:
+            self.sql_add_Calender(schoolnumber,datekun,timekun,nendo)
+            await ctx.send("attended!!" + str(schoolnumber))
 
     @commands.command()
     async def show(self, ctx):
