@@ -14,6 +14,6 @@ cur.execute("CREATE TABLE IF NOT EXISTS \"userinfo\" (\"schoolnumber\"	INTEGER N
 cur.execute("CREATE TABLE IF NOT EXISTS \"Calender\" (\"schoolnumber\" INTEGER  NOT NULL,\"date\" TEXT NOT NULL,\"time\" TEXT NOT NULL,\"fiscalyear\" INTEGER NOT NULL,PRIMARY KEY(\"schoolnumber\",\"date\",\"fiscalyear\"))")
 bot = commands.Bot(command_prefix='/')
 bot.add_cog(AdminCategory(bot=bot,cur=cur,conn=conn))
-bot.add_cog(ScheduleCategory(bot=bot,cur=cur,conn=conn))
+bot.add_cog(ScheduleCategory(bot=bot,cur=cur,conn=conn,nendo=nendo))
 bot.run(TOKEN)
 conn.close()
