@@ -1,3 +1,4 @@
+import discord
 from discord.ext import commands
 import datetime
 
@@ -45,7 +46,7 @@ def getCalenders(datekun,cur2):
     '''
     kaesuhairetu=[]
     for row in cur2.execute(query,(datekun,)):
-        kaesuhairetu.append(row[0],row[1])
+        kaesuhairetu.append([row[0],row[1]])
     return kaesuhairetu
 
 class ScheduleCategory(commands.Cog, name="schedule"):
@@ -79,4 +80,12 @@ class ScheduleCategory(commands.Cog, name="schedule"):
 
     @commands.command()
     async def show(self, ctx):
-        await ctx.send("show")
+        datekun = datetime.datetime.now(JST).strftime("%Y%m%d")
+        calenders=getCalenders(datekun,self.cur)
+        embed=discord.Embed(title=f"__** 本日の出席記録 **__", color=0x03f8fc,timestamp= ctx.message.created_at)
+
+        for rowkun in calenders:
+            embed.add_field(name=f'**{rowkun[0]}**',
+                            value=f'> time:{rowkun[1]}',
+                            inline=False)
+        await ctx.send(embed=embed)
