@@ -15,7 +15,7 @@ bot = commands.Bot(command_prefix='/')
 async def attend(ctx):
     idkun=int(ctx.author.id)
 
-    await ctx.send("attended!!")
+    await ctx.send("attended!!" + str(idkun))
 @bot.command()
 async def show(ctx):
     await ctx.send("show")
