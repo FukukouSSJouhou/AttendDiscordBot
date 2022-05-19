@@ -39,6 +39,14 @@ def getSchoolNumber(userid, cur2):
         return row[0]
     return 0
 
+def getCalenders(datekun,cur2):
+    query=u'''SELECT \"schoolnumber\",\"time\" from Calender
+    WHERE date = ?
+    '''
+    kaesuhairetu=[]
+    for row in cur2.execute(query,(datekun,)):
+        kaesuhairetu.append(row[0],row[1])
+    return kaesuhairetu
 
 class ScheduleCategory(commands.Cog, name="schedule"):
     def __init__(self, bot, cur, conn, nendo):
