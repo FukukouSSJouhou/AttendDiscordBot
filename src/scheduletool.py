@@ -7,7 +7,9 @@ def isExistAttendCalam(schoolnumber,datekun,fiscalyear,cur2,conn2):
     fiscalyear = ?)
     
         '''
-    
+    cur2.execute(query,(schoolnumber,datekun,fiscalyear))
+    print(cur2.fetchone())
+
 class ScheduleCategory(commands.Cog, name="schedule"):
     def __init__(self, bot, cur, conn,nendo):
         super().__init__()
@@ -20,6 +22,9 @@ class ScheduleCategory(commands.Cog, name="schedule"):
         idkun=int(ctx.author.id)
 
         await ctx.send("attended!!" + str(idkun))
+    @commands.command()
+    async def chkkun(self,ctx):
+        await ctx.send("test")
     @commands.command()
     async def show(self,ctx):
         await ctx.send("show")
