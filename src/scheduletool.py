@@ -1,4 +1,5 @@
 from discord.ext import commands
+import datetime
 
 def isExistAttendCalam(schoolnumber,datekun,timekun,fiscalyear,cur2,conn2):
     query=u'''SELECT EXISTS(SELECT * FROM Calender WHERE 
@@ -35,7 +36,7 @@ class ScheduleCategory(commands.Cog, name="schedule"):
         if schoolnumber == 0:
             await ctx.send("no registered!")
             return
-        
+
         await ctx.send("attended!!" + str(schoolnumber))
 
     @commands.command()
