@@ -32,6 +32,10 @@ class ScheduleCategory(commands.Cog, name="schedule"):
     async def attend(self,ctx):
         idkun=int(ctx.author.id)
         schoolnumber=getSchoolNumber(idkun,self.cur)
+        if schoolnumber == 0:
+            await ctx.send("no registered!")
+            return
+        
         await ctx.send("attended!!" + str(schoolnumber))
 
     @commands.command()
